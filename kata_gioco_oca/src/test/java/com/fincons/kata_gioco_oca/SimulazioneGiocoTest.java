@@ -1,5 +1,6 @@
 package com.fincons.kata_gioco_oca;
 
+import com.fincons.kata_gioco_oca.services.GiocatoreHelper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -16,17 +17,16 @@ import static org.mockito.Mockito.when;
 class SimulazioneGiocoTest {
     @InjectMocks
     SimulazioneGioco simulazioneGioco;
-
     @Mock
-    LancioDueDadi lancioDueDadi;
+    GiocatoreHelper giocatoreHelper;
 
 
     @Test
     void aggiornaPosizionePrimoTurno() {
         int posizioneAttuale = 0;
-        when(lancioDueDadi.execute()).thenReturn(2);
+        when(giocatoreHelper.lancioDueDadi()).thenReturn(2);
 
-        int nuovaPosizione = simulazioneGioco.aggiornaPosizione(posizioneAttuale, simulazioneGioco.lancioDueDadi.execute());
+        int nuovaPosizione = simulazioneGioco.aggiornaPosizione(posizioneAttuale, giocatoreHelper.lancioDueDadi());
 
         assertThat(nuovaPosizione).isGreaterThan(posizioneAttuale);
     }
@@ -34,9 +34,9 @@ class SimulazioneGiocoTest {
     @Test
     void aggiornaPosizioneSeSuperoCasellaFinale() {
         int posizioneAttuale = 62;
-        when(lancioDueDadi.execute()).thenReturn(5);
+        when(giocatoreHelper.lancioDueDadi()).thenReturn(5);
 
-        int nuovaPosizione = simulazioneGioco.aggiornaPosizione(posizioneAttuale, simulazioneGioco.lancioDueDadi.execute());
+        int nuovaPosizione = simulazioneGioco.aggiornaPosizione(posizioneAttuale, giocatoreHelper.lancioDueDadi());
 
         assertThat(nuovaPosizione).isEqualTo(59);
     }
@@ -47,7 +47,7 @@ class SimulazioneGiocoTest {
         ByteArrayOutputStream outSpy = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outSpy));
 
-        when(lancioDueDadi.execute()).thenReturn(5, 8, 10, 7, 12, 10, 10, 3, 2);
+        when(giocatoreHelper.lancioDueDadi()).thenReturn(5, 8, 10, 7, 12, 10, 10, 3, 2);
         simulazioneGioco.start();
         StringBuilder expected = new StringBuilder("inizio gioco\r\n");
         expected.append("il giocatore 1 lancia i dadi e ottiene: " + 5 + " e ora raggiunge la casella: " + 5 + "\r\n");
