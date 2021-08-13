@@ -1,29 +1,43 @@
 package com.fincons.kata_gioco_oca;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.*;
 
+@ExtendWith(MockitoExtension.class)
+class SimulazioneGiocoTest
+{
+	@InjectMocks
+	SimulazioneGioco simulazioneGioco;
 
-class SimulazioneGiocoTest {
+	@Mock
+	LancioDueDadi lancioDueDadi;
 
+	@Test
+	void aggiornaPosizionePrimoTurno()
+	{
+		int posizioneAttuale = 0;
+		when(lancioDueDadi.execute()).thenReturn(2);
 
-    @Test
-    void lancioDueDadi() {
+		int nuovaPosizione = simulazioneGioco.aggiornaPosizione(posizioneAttuale);
 
-        SimulazioneGioco simulazioneGioco = new SimulazioneGioco();
-        int lancioResult = simulazioneGioco.lancioDueDadi();
-        assertThat(lancioResult).isGreaterThanOrEqualTo(2).isLessThanOrEqualTo(12);
-    }
+		assertThat(nuovaPosizione).isGreaterThan(posizioneAttuale);
+	}
 
-    @Test
-    void aggiornaPosizionePrimoTurno() {
-        SimulazioneGioco simulazioneGioco = new SimulazioneGioco();
-        int posizioneAttuale = 0;
-        int nuovaPosizione = simulazioneGioco.aggiornaPosizione(posizioneAttuale);
+	@Test
+	void aggiornaPosizioneSeSuperoCasellaFinale()
+	{
+		int posizioneAttuale = 62;
+		when(lancioDueDadi.execute()).thenReturn(5);
 
-        assertThat(nuovaPosizione).isGreaterThan(posizioneAttuale);
-    }
+		int nuovaPosizione = simulazioneGioco.aggiornaPosizione(posizioneAttuale);
 
-
+		assertThat(nuovaPosizione).isEqualTo(59);
+	}
 }

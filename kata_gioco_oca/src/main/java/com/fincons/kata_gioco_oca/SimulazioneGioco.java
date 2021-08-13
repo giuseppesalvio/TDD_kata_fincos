@@ -2,23 +2,43 @@ package com.fincons.kata_gioco_oca;
 
 import org.springframework.stereotype.Service;
 
-import java.util.Random;
-
 @Service
-public class SimulazioneGioco {
+public
+class SimulazioneGioco
+{
 
-    public void start() {
-    }
+	public static final int CASELLA_FINALE = 63;
+	final LancioDueDadi lancioDueDadi;
 
-    public int lancioDueDadi() {
+	public
+	SimulazioneGioco(LancioDueDadi lancioDueDadi)
+	{
+		this.lancioDueDadi = lancioDueDadi;
+	}
 
-        Random random = new Random();
-        return random.nextInt(12 - 2) + 2;
+	public
+	void start()
+	{
+	}
 
-    }
+	public
+	int aggiornaPosizione(int posizioneAttuale)
+	{
+		int posizioneDopoLancio = posizioneAttuale + lancioDueDadi.execute();
 
-    public int aggiornaPosizione(int posizioneAttuale) {
+		posizioneDopoLancio = controllaSeTornareIndietro(posizioneDopoLancio);
 
-        return  posizioneAttuale  + lancioDueDadi();
-    }
+		return posizioneDopoLancio;
+	}
+
+	private
+	int controllaSeTornareIndietro(int posizioneDopoLancio)
+	{
+		if (posizioneDopoLancio > CASELLA_FINALE)
+		{
+			int posizioneSurplus = posizioneDopoLancio - CASELLA_FINALE;
+			posizioneDopoLancio = CASELLA_FINALE - posizioneSurplus;
+		}
+		return posizioneDopoLancio;
+	}
 }
