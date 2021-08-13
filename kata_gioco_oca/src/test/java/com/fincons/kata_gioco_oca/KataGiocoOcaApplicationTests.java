@@ -8,6 +8,9 @@ class KataGiocoOcaApplicationTests {
 
     @Test
     void contextLoads() {
+
+
     }
+
 
 }
