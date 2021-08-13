@@ -10,7 +10,7 @@ public class KataGiocoOcaApplication {
 
     public static void main(String[] args) {
 
-        SpringApplication.run(KataGiocoOcaApplication.class, args);
+
         ConfigurableApplicationContext applicationContext = new SpringApplication(KataGiocoOcaApplication.class).run(args);
 
         SimulazioneGioco simulazioneGioco = applicationContext.getBean(SimulazioneGioco.class);
