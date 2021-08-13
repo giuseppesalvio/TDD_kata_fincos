@@ -8,10 +8,14 @@ import java.util.Random;
 public
 class LancioDueDadi
 {
+
+	public static final int VALORE_MASSIMO_SOMMA = 12;
+	public static final int VALORE_MINIMO_SOMMA = 2;
+
 	public
 	int execute()
 	{
 		Random random = new Random();
-		return random.nextInt(12 - 2) + 2;
+		return random.nextInt(VALORE_MASSIMO_SOMMA - VALORE_MINIMO_SOMMA) + VALORE_MINIMO_SOMMA;
 	}
 }
