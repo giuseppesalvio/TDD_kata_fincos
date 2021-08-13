@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/TDD_kata_fincos.iml" filepath="$PROJECT_DIR$/.idea/TDD_kata_fincos.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kata_gioco_oca/kata_gioco_oca.iml" filepath="$PROJECT_DIR$/kata_gioco_oca/kata_gioco_oca.iml" />
+    </modules>
+  </component>
+</project>
