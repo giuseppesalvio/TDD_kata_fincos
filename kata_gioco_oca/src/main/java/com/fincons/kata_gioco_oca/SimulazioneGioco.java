@@ -7,6 +7,7 @@ public
 class SimulazioneGioco {
 
   public static final int CASELLA_FINALE = 63;
+  public static final int CASELLA_INIZIALE = 0;
   final LancioDueDadi lancioDueDadi;
 
   public SimulazioneGioco(LancioDueDadi lancioDueDadi) {
@@ -14,18 +15,20 @@ class SimulazioneGioco {
   }
 
   public void start() {
-
     System.out.println("inizio gioco");
-
-    int posizioneDopoLancio=0;
-    while(posizioneDopoLancio!=CASELLA_FINALE){
-      posizioneDopoLancio= aggiornaPosizione(posizioneDopoLancio);
+    int posizione= CASELLA_INIZIALE;
+    while(!controllaGiocoFinito(posizione)){
+      int valoreSommaDadi = lancioDueDadi.execute();
+      posizione= aggiornaPosizione(posizione, valoreSommaDadi);
     }
     System.out.println("il gioco è finito");
   }
 
-  public int aggiornaPosizione(int posizioneAttuale) {
-    int lancioDadi = lancioDueDadi.execute();
+  private boolean controllaGiocoFinito(int posizioneDopoLancio) {
+    return posizioneDopoLancio == CASELLA_FINALE;
+  }
+
+  public int aggiornaPosizione(int posizioneAttuale, int lancioDadi) {
 
     int posizioneDopoLancio = posizioneAttuale + lancioDadi;
 
