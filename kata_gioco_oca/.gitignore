@@ -19,6 +19,8 @@ target/
 *.iml
 *.ipr
 /target
+mvnw.cmd
+kata_gioco_oca.iml
 
 
 ### NetBeans ###
