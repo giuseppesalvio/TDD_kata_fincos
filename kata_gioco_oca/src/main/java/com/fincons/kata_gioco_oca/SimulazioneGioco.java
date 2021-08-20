@@ -18,20 +18,21 @@ class SimulazioneGioco {
 
     public void start(Giocatore primoGiocatore) {
         System.out.println("inizio gioco");
-        int posizione = CASELLA_INIZIALE;
-        while (!controllaGiocoFinito(posizione)) {
+        while (!controllaGiocoFinito(primoGiocatore.getPosizioneAttuale())) {
             int valoreSommaDadi = giocatoreHelper.lancioDueDadi();
-            posizione = calcolaNuovaPosizione(posizione, valoreSommaDadi);
+            spostaGiocatore(primoGiocatore, valoreSommaDadi);
             System.out
-                    .println("il giocatore " + primoGiocatore.getNomeGiocatore() + " lancia i dadi e ottiene: " + valoreSommaDadi + " e ora raggiunge la casella: " + posizione);
+                    .println("il giocatore " + primoGiocatore.getNomeGiocatore() + " lancia i dadi e ottiene: " + valoreSommaDadi + " e ora raggiunge la casella: " + primoGiocatore.getPosizioneAttuale());
 
         }
         System.out.println("il gioco è finito");
     }
 
-    private boolean controllaGiocoFinito(int posizioneDopoLancio) {
-        return posizioneDopoLancio == CASELLA_FINALE;
+    private void spostaGiocatore(Giocatore giocatore, int valoreSommaDadi) {
+        int posizioneAttuale = calcolaNuovaPosizione(giocatore.getPosizioneAttuale(), valoreSommaDadi);
+        giocatore.setPosizioneAttuale(posizioneAttuale);
     }
+
 
     public int calcolaNuovaPosizione(int posizioneAttuale, int lancioDadi) {
 
@@ -40,6 +41,10 @@ class SimulazioneGioco {
         posizioneDopoLancio = controllaSeTornareIndietro(posizioneDopoLancio);
 
         return posizioneDopoLancio;
+    }
+
+    private boolean controllaGiocoFinito(int posizioneDopoLancio) {
+        return posizioneDopoLancio == CASELLA_FINALE;
     }
 
     private int controllaSeTornareIndietro(int posizioneDopoLancio) {
