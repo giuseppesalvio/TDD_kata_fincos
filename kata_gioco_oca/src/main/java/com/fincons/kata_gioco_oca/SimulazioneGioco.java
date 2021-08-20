@@ -1,5 +1,6 @@
 package com.fincons.kata_gioco_oca;
 
+import com.fincons.kata_gioco_oca.models.Giocatore;
 import com.fincons.kata_gioco_oca.services.GiocatoreHelper;
 import org.springframework.stereotype.Service;
 
@@ -15,14 +16,14 @@ class SimulazioneGioco {
         this.giocatoreHelper = giocatoreHelper;
     }
 
-    public void start() {
+    public void start(Giocatore primoGiocatore) {
         System.out.println("inizio gioco");
         int posizione = CASELLA_INIZIALE;
         while (!controllaGiocoFinito(posizione)) {
             int valoreSommaDadi = giocatoreHelper.lancioDueDadi();
-            posizione = aggiornaPosizione(posizione, valoreSommaDadi);
+            posizione = calcolaNuovaPosizione(posizione, valoreSommaDadi);
             System.out
-                    .println("il giocatore 1 lancia i dadi e ottiene: " + valoreSommaDadi + " e ora raggiunge la casella: " + posizione);
+                    .println("il giocatore " + primoGiocatore.getNomeGiocatore() + " lancia i dadi e ottiene: " + valoreSommaDadi + " e ora raggiunge la casella: " + posizione);
 
         }
         System.out.println("il gioco è finito");
@@ -32,7 +33,7 @@ class SimulazioneGioco {
         return posizioneDopoLancio == CASELLA_FINALE;
     }
 
-    public int aggiornaPosizione(int posizioneAttuale, int lancioDadi) {
+    public int calcolaNuovaPosizione(int posizioneAttuale, int lancioDadi) {
 
         int posizioneDopoLancio = posizioneAttuale + lancioDadi;
 
