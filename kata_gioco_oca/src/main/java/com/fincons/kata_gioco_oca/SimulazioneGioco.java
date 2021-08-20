@@ -21,6 +21,9 @@ class SimulazioneGioco {
         while (!controllaGiocoFinito(posizione)) {
             int valoreSommaDadi = giocatoreHelper.lancioDueDadi();
             posizione = aggiornaPosizione(posizione, valoreSommaDadi);
+            System.out
+                    .println("il giocatore 1 lancia i dadi e ottiene: " + valoreSommaDadi + " e ora raggiunge la casella: " + posizione);
+
         }
         System.out.println("il gioco è finito");
     }
@@ -35,8 +38,6 @@ class SimulazioneGioco {
 
         posizioneDopoLancio = controllaSeTornareIndietro(posizioneDopoLancio);
 
-        System.out
-                .println("il giocatore 1 lancia i dadi e ottiene: " + lancioDadi + " e ora raggiunge la casella: " + posizioneDopoLancio);
         return posizioneDopoLancio;
     }
 

@@ -64,6 +64,7 @@ class SimulazioneGiocoTest {
         assertThat(outSpy.toString()).isEqualTo(expected.toString());
 
     }
+    
 
 
 }
