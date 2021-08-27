@@ -62,7 +62,7 @@ class SimulazioneGiocoTest {
         expected.append("il giocatore Giovanna lancia i dadi e ottiene: " + 10 + " e ora raggiunge la casella: " + 62 + "\r\n");
         expected.append("il giocatore Giovanna lancia i dadi e ottiene: " + 3 + " e ora raggiunge la casella: " + 61 + "\r\n");
         expected.append("il giocatore Giovanna lancia i dadi e ottiene: " + 2 + " e ora raggiunge la casella: " + 63 + "\r\n");
-        expected.append("il gioco è finito\r\n");
+	    expected.append("il gioco è finito, ha vinto Giovanna\r\n");
         assertThat(outSpy.toString()).hasToString(expected.toString());
     }
 
@@ -95,7 +95,7 @@ class SimulazioneGiocoTest {
         expected.append("il giocatore Giovanna lancia i dadi e ottiene: " + 10 + " e ora raggiunge la casella: " + 59 + "\r\n");
         expected.append("il giocatore Paolo lancia i dadi e ottiene: " + 23 + " e ora raggiunge la casella: " + 63 + "\r\n");
 
-	    expected.append("il gioco è finito\r\n");
+	    expected.append("il gioco è finito, ha vinto Paolo\r\n");
 
         System.err.println(outSpy.toString());
         assertThat(outSpy.toString()).isEqualTo(expected.toString());
@@ -128,10 +128,11 @@ class SimulazioneGiocoTest {
 		expected.append("il giocatore Paolo lancia i dadi e ottiene: " + 12 + " e ora raggiunge la casella: " + 40 + "\r\n");
 
 		expected.append("il giocatore Giovanna lancia i dadi e ottiene: " + 14 + " e ora raggiunge la casella: " + 63 + "\r\n");
-		expected.append("il gioco è finito\r\n");
+		expected.append("il gioco è finito, ha vinto Giovanna\r\n");
 
 		System.err.println(outSpy.toString());
 		assertThat(outSpy.toString()).isEqualTo(expected.toString());
 	}
+
 
 }

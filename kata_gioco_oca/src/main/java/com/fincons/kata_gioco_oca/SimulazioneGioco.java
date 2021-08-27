@@ -20,8 +20,8 @@ class SimulazioneGioco {
 
     public void start(List<Giocatore> giocatori) {
 
-        System.out.println("inizio gioco");
-        while (!giocoFinito) {
+	    stampaInizioGioco();
+	    while (!giocoFinito) {
 	        for (Giocatore giocatore : giocatori)
 	        {
 		        int valoreSommaDadi = giocatoreHelper.lancioDueDadi();
@@ -29,7 +29,7 @@ class SimulazioneGioco {
 		        stampaGameStatus(valoreSommaDadi, giocatore);
 		        if(giocatore.getPosizioneAttuale() == CASELLA_FINALE)
 		        {
-			        System.out.println("il gioco è finito");
+			        stampaVincitore(giocatore.getNomeGiocatore());
 			        giocoFinito = true;
 			        break;
 		        }
@@ -41,9 +41,15 @@ class SimulazioneGioco {
     }
 
 	private
-	boolean controllaGiocoFinito(List<Giocatore> giocatori)
+	void stampaInizioGioco()
 	{
-		return giocatori.stream().anyMatch(giocatore -> giocatore.getPosizioneAttuale() == CASELLA_FINALE);
+		System.out.println("inizio gioco");
+	}
+
+	private
+	void stampaVincitore(String nomeGiocatore)
+	{
+		System.out.println("il gioco è finito, ha vinto " +nomeGiocatore);
 	}
 
 	private void stampaGameStatus(int valoreSommaDadi, Giocatore giocatore) {
