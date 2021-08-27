@@ -23,12 +23,16 @@ class SimulazioneGioco {
         while (!controllaGiocoFinito(giocatori.get(0).getPosizioneAttuale())) {
             int valoreSommaDadi = giocatoreHelper.lancioDueDadi();
             spostaGiocatore(giocatori.get(0), valoreSommaDadi);
-            System.out
-                    .println("il giocatore " + giocatori.get(0).getNomeGiocatore() + " lancia i dadi e ottiene: "
-                            + valoreSommaDadi + " e ora raggiunge la casella: " + giocatori.get(0).getPosizioneAttuale());
+            stampaGameStatus(giocatori, valoreSommaDadi);
 
         }
         System.out.println("il gioco è finito");
+    }
+
+    private void stampaGameStatus(List<Giocatore> giocatori, int valoreSommaDadi) {
+        System.out
+                .println("il giocatore " + giocatori.get(0).getNomeGiocatore() + " lancia i dadi e ottiene: "
+                        + valoreSommaDadi + " e ora raggiunge la casella: " + giocatori.get(0).getPosizioneAttuale());
     }
 
     private void spostaGiocatore(Giocatore giocatore, int valoreSommaDadi) {
