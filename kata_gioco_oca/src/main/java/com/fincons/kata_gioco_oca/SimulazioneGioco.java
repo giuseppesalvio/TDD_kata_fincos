@@ -12,25 +12,32 @@ class SimulazioneGioco {
 
     public static final int CASELLA_FINALE = 63;
     private final GiocatoreHelper giocatoreHelper;
+	private boolean giocoFinito;
 
-    public SimulazioneGioco(GiocatoreHelper giocatoreHelper) {
+	public SimulazioneGioco(GiocatoreHelper giocatoreHelper) {
         this.giocatoreHelper = giocatoreHelper;
     }
 
     public void start(List<Giocatore> giocatori) {
 
         System.out.println("inizio gioco");
-        while (!controllaGiocoFinito(giocatori)) {
+        while (!giocoFinito) {
 	        for (Giocatore giocatore : giocatori)
 	        {
 		        int valoreSommaDadi = giocatoreHelper.lancioDueDadi();
 		        spostaGiocatore(giocatore, valoreSommaDadi);
 		        stampaGameStatus(valoreSommaDadi, giocatore);
+		        if(giocatore.getPosizioneAttuale() == CASELLA_FINALE)
+		        {
+			        System.out.println("il gioco è finito");
+			        giocoFinito = true;
+			        break;
+		        }
 	        }
 
 
         }
-        System.out.println("il gioco è finito");
+
     }
 
 	private
