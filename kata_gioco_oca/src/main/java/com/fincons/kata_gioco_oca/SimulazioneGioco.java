@@ -9,7 +9,6 @@ public
 class SimulazioneGioco {
 
     public static final int CASELLA_FINALE = 63;
-    public static final int CASELLA_INIZIALE = 0;
     private final GiocatoreHelper giocatoreHelper;
 
     public SimulazioneGioco(GiocatoreHelper giocatoreHelper) {
