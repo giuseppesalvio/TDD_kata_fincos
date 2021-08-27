@@ -20,7 +20,7 @@ class SimulazioneGioco {
     public void start(List<Giocatore> giocatori) {
 
         System.out.println("inizio gioco");
-        while (!controllaGiocoFinito(giocatori.get(0).getPosizioneAttuale())) {
+        while (!controllaGiocoFinito(giocatori)) {
 	        for (Giocatore giocatore : giocatori)
 	        {
 		        int valoreSommaDadi = giocatoreHelper.lancioDueDadi();
@@ -33,7 +33,13 @@ class SimulazioneGioco {
         System.out.println("il gioco è finito");
     }
 
-    private void stampaGameStatus(int valoreSommaDadi, Giocatore giocatore) {
+	private
+	boolean controllaGiocoFinito(List<Giocatore> giocatori)
+	{
+		return giocatori.stream().anyMatch(giocatore -> giocatore.getPosizioneAttuale() == CASELLA_FINALE);
+	}
+
+	private void stampaGameStatus(int valoreSommaDadi, Giocatore giocatore) {
         System.out
                 .println("il giocatore " + giocatore.getNomeGiocatore() + " lancia i dadi e ottiene: "
                          + valoreSommaDadi + " e ora raggiunge la casella: " + giocatore.getPosizioneAttuale());
@@ -54,11 +60,7 @@ class SimulazioneGioco {
         return posizioneDopoLancio;
     }
 
-    private boolean controllaGiocoFinito(int posizioneDopoLancio) {
-        return posizioneDopoLancio == CASELLA_FINALE;
-    }
-
-    private int controllaSeTornareIndietro(int posizioneDopoLancio) {
+	private int controllaSeTornareIndietro(int posizioneDopoLancio) {
         if (posizioneDopoLancio > CASELLA_FINALE) {
             int posizioneSurplus = posizioneDopoLancio - CASELLA_FINALE;
             posizioneDopoLancio = CASELLA_FINALE - posizioneSurplus;

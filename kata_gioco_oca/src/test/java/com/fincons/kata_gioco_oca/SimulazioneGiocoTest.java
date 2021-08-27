@@ -98,7 +98,7 @@ class SimulazioneGiocoTest {
 	    expected.append("il gioco è finito\r\n");
 
         System.err.println(outSpy.toString());
-        assertThat(outSpy.toString()).startsWith(expected.toString());
+        assertThat(outSpy.toString()).isEqualTo(expected.toString());
     }
 
 }
