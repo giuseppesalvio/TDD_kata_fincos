@@ -10,7 +10,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
@@ -64,5 +66,21 @@ class SimulazioneGiocoTest {
         assertThat(outSpy.toString()).hasToString(expected.toString());
     }
 
+    @Test
+    void inizioDueGiocatori() {
+        ByteArrayOutputStream outSpy = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outSpy));
+        when(giocatoreHelper.lancioDueDadi()).thenReturn(5, 8, 10, 7, 12, 10, 10, 3, 2);
+
+        List<Giocatore> giocatori = Arrays.asList(new Giocatore("Giovanna", 0),
+                new Giocatore("Paolo", 0));
+
+        simulazioneGioco.start(giocatori);
+        StringBuilder expected = new StringBuilder("inizio gioco\r\n");
+        expected.append("il giocatore Giovanna lancia i dadi e ottiene: " + 5 + " e ora raggiunge la casella: " + 5 + "\r\n");
+        expected.append("il giocatore Paolo lancia i dadi e ottiene: " + 8 + " e ora raggiunge la casella: " + 8 + "\r\n");
+
+        assertThat(outSpy.toString()).startsWith(expected.toString());
+    }
 
 }
