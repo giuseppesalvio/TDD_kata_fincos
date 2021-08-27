@@ -4,6 +4,8 @@ import com.fincons.kata_gioco_oca.models.Giocatore;
 import com.fincons.kata_gioco_oca.services.GiocatoreHelper;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public
 class SimulazioneGioco {
@@ -15,13 +17,15 @@ class SimulazioneGioco {
         this.giocatoreHelper = giocatoreHelper;
     }
 
-    public void start(Giocatore primoGiocatore) {
+    public void start(List<Giocatore> giocatori) {
+
         System.out.println("inizio gioco");
-        while (!controllaGiocoFinito(primoGiocatore.getPosizioneAttuale())) {
+        while (!controllaGiocoFinito(giocatori.get(0).getPosizioneAttuale())) {
             int valoreSommaDadi = giocatoreHelper.lancioDueDadi();
-            spostaGiocatore(primoGiocatore, valoreSommaDadi);
+            spostaGiocatore(giocatori.get(0), valoreSommaDadi);
             System.out
-                    .println("il giocatore " + primoGiocatore.getNomeGiocatore() + " lancia i dadi e ottiene: " + valoreSommaDadi + " e ora raggiunge la casella: " + primoGiocatore.getPosizioneAttuale());
+                    .println("il giocatore " + giocatori.get(0).getNomeGiocatore() + " lancia i dadi e ottiene: "
+                            + valoreSommaDadi + " e ora raggiunge la casella: " + giocatori.get(0).getPosizioneAttuale());
 
         }
         System.out.println("il gioco è finito");

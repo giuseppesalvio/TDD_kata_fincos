@@ -10,6 +10,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.Collections;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
@@ -47,7 +48,8 @@ class SimulazioneGiocoTest {
         ByteArrayOutputStream outSpy = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outSpy));
         when(giocatoreHelper.lancioDueDadi()).thenReturn(5, 8, 10, 7, 12, 10, 10, 3, 2);
-        simulazioneGioco.start(new Giocatore("Giovanna", 0));
+
+        simulazioneGioco.start(Collections.singletonList(new Giocatore("Giovanna", 0)));
         StringBuilder expected = new StringBuilder("inizio gioco\r\n");
         expected.append("il giocatore Giovanna lancia i dadi e ottiene: " + 5 + " e ora raggiunge la casella: " + 5 + "\r\n");
         expected.append("il giocatore Giovanna lancia i dadi e ottiene: " + 8 + " e ora raggiunge la casella: " + 13 + "\r\n");
@@ -59,10 +61,8 @@ class SimulazioneGiocoTest {
         expected.append("il giocatore Giovanna lancia i dadi e ottiene: " + 3 + " e ora raggiunge la casella: " + 61 + "\r\n");
         expected.append("il giocatore Giovanna lancia i dadi e ottiene: " + 2 + " e ora raggiunge la casella: " + 63 + "\r\n");
         expected.append("il gioco è finito\r\n");
-        assertThat(outSpy.toString()).isEqualTo(expected.toString());
+        assertThat(outSpy.toString()).hasToString(expected.toString());
     }
-
-
 
 
 }
