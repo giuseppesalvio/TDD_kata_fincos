@@ -46,7 +46,7 @@ class SimulazioneGiocoTest {
     }
 
     @Test
-    void inizioConNomeGiocatore() {
+    void partitaConUnGiocatore() {
         ByteArrayOutputStream outSpy = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outSpy));
         when(giocatoreHelper.lancioDueDadi()).thenReturn(5, 8, 10, 7, 12, 10, 10, 3, 2);
@@ -67,10 +67,10 @@ class SimulazioneGiocoTest {
     }
 
     @Test
-    void inizioDueGiocatori() {
+    void partitaConDueGiocatori() {
         ByteArrayOutputStream outSpy = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outSpy));
-        when(giocatoreHelper.lancioDueDadi()).thenReturn(5, 8, 10, 7, 12, 10, 10, 3, 2);
+        when(giocatoreHelper.lancioDueDadi()).thenReturn(5, 8, 10, 7, 12, 10, 10, 3, 12, 12, 10, 23, 1);
 
         List<Giocatore> giocatori = Arrays.asList(new Giocatore("Giovanna", 0),
                 new Giocatore("Paolo", 0));
@@ -80,6 +80,24 @@ class SimulazioneGiocoTest {
         expected.append("il giocatore Giovanna lancia i dadi e ottiene: " + 5 + " e ora raggiunge la casella: " + 5 + "\r\n");
         expected.append("il giocatore Paolo lancia i dadi e ottiene: " + 8 + " e ora raggiunge la casella: " + 8 + "\r\n");
 
+        expected.append("il giocatore Giovanna lancia i dadi e ottiene: " + 10 + " e ora raggiunge la casella: " + 15 + "\r\n");
+        expected.append("il giocatore Paolo lancia i dadi e ottiene: " + 7 + " e ora raggiunge la casella: " + 15 + "\r\n");
+
+        expected.append("il giocatore Giovanna lancia i dadi e ottiene: " + 12 + " e ora raggiunge la casella: " + 27 + "\r\n");
+        expected.append("il giocatore Paolo lancia i dadi e ottiene: " + 10 + " e ora raggiunge la casella: " + 25 + "\r\n");
+
+        expected.append("il giocatore Giovanna lancia i dadi e ottiene: " + 10 + " e ora raggiunge la casella: " + 37 + "\r\n");
+        expected.append("il giocatore Paolo lancia i dadi e ottiene: " + 3 + " e ora raggiunge la casella: " + 28 + "\r\n");
+
+        expected.append("il giocatore Giovanna lancia i dadi e ottiene: " + 12 + " e ora raggiunge la casella: " + 49 + "\r\n");
+        expected.append("il giocatore Paolo lancia i dadi e ottiene: " + 12 + " e ora raggiunge la casella: " + 40 + "\r\n");
+
+        expected.append("il giocatore Giovanna lancia i dadi e ottiene: " + 10 + " e ora raggiunge la casella: " + 59 + "\r\n");
+        expected.append("il giocatore Paolo lancia i dadi e ottiene: " + 23 + " e ora raggiunge la casella: " + 63 + "\r\n");
+
+	    expected.append("il gioco è finito\r\n");
+
+        System.err.println(outSpy.toString());
         assertThat(outSpy.toString()).startsWith(expected.toString());
     }
 
