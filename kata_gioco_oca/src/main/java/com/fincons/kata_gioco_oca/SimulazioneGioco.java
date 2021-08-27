@@ -24,13 +24,9 @@ class SimulazioneGioco {
 	    while (!giocoFinito) {
 	        for (Giocatore giocatore : giocatori)
 	        {
-		        int valoreSommaDadi = giocatoreHelper.lancioDueDadi();
-		        spostaGiocatore(giocatore, valoreSommaDadi);
-		        stampaGameStatus(valoreSommaDadi, giocatore);
-		        if(giocatore.getPosizioneAttuale() == CASELLA_FINALE)
+		        turnoGiocatore(giocatore);
+		        if (isPosizioneFinaleRaggiunta(giocatore))
 		        {
-			        stampaVincitore(giocatore.getNomeGiocatore());
-			        giocoFinito = true;
 			        break;
 		        }
 	        }
@@ -39,6 +35,25 @@ class SimulazioneGioco {
         }
 
     }
+
+	private
+	void turnoGiocatore(Giocatore giocatore)
+	{
+		int valoreSommaDadi = giocatoreHelper.lancioDueDadi();
+		spostaGiocatore(giocatore, valoreSommaDadi);
+		stampaGameStatus(valoreSommaDadi, giocatore);
+	}
+
+	private
+	boolean isPosizioneFinaleRaggiunta(Giocatore giocatore)
+	{
+		if(giocatore.getPosizioneAttuale() == CASELLA_FINALE)
+		{
+			stampaVincitore(giocatore.getNomeGiocatore());
+			giocoFinito = true;
+		}
+		return giocoFinito;
+	}
 
 	private
 	void stampaInizioGioco()
